@@ -1,6 +1,6 @@
 {
   "name": "gulp-mocha-thin",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Run Mocha on Gulp",
   "main": "dist/index.js",
   "scripts": {
