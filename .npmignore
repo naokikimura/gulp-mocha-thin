@@ -102,3 +102,10 @@ typings/
 
 # TernJS port file
 .tern-port
+
+.vscode
+.mocharc.js
+.travis.yml
+gulpfile.js
+tsconfig.json
+tslint.json
