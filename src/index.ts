@@ -1,7 +1,11 @@
+import fs from 'fs';
 import Mocha from 'mocha';
 import MochaOptions from 'mocha/lib/cli/options';
+import PluginError from 'plugin-error';
 import stream from 'stream';
 import util from 'util';
+
+const { packageName } = JSON.parse(fs.readFileSync('./package.json', { encoding: 'UTF-8' }));
 
 const debug = util.debuglog('gulp-mocha-thin');
 
@@ -26,9 +30,13 @@ export = (options: string | string[] | Mocha.MochaOptions = '') => {
       callback();
     },
     final(callback) {
-      mocha.run(failures => {
-        callback();
-      });
+      try {
+        mocha.run(failures => {
+          callback(failures > 0 ? new PluginError(packageName, `failures: ${failures}`) : null);
+        });
+      } catch (error) {
+        callback(new PluginError(packageName, error));
+      }
     },
   });
 };
