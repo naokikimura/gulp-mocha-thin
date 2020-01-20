@@ -5,7 +5,7 @@ import PluginError from 'plugin-error';
 import stream from 'stream';
 import util from 'util';
 
-const { packageName } = JSON.parse(fs.readFileSync('./package.json', { encoding: 'UTF-8' }));
+const { name: packageName } = JSON.parse(fs.readFileSync('./package.json', { encoding: 'UTF-8' }));
 
 const debug = util.debuglog('gulp-mocha-thin');
 
