@@ -5,7 +5,7 @@ import PluginError from 'plugin-error';
 import stream from 'stream';
 import util from 'util';
 
-const { name: packageName } = JSON.parse(fs.readFileSync('./package.json', { encoding: 'UTF-8' }));
+const PLUGIN_NAME = 'gulp-mocha-thin';
 
 const debug = util.debuglog('gulp-mocha-thin');
 
@@ -32,10 +32,10 @@ export = (options: string | string[] | Mocha.MochaOptions = '') => {
     final(callback) {
       try {
         mocha.run(failures => {
-          callback(failures > 0 ? new PluginError(packageName, `failures: ${failures}`) : null);
+          callback(failures > 0 ? new PluginError(PLUGIN_NAME, `failures: ${failures}`) : null);
         });
       } catch (error) {
-        callback(new PluginError(packageName, error));
+        callback(new PluginError(PLUGIN_NAME, error));
       }
     },
   });
